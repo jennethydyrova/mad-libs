@@ -28,8 +28,10 @@
  */
 function parseStory(rawStory) {
   // Your code here.
-  return {}; // This line is currently wrong :)
+  return JSON.parse(rawStory);
+  // This line is currently wrong :)
 }
+// console.log(parseStory())
 
 /**
  * All your other JavaScript code goes here, inside the function. Don't worry about
@@ -47,3 +49,11 @@ getRawStory()
   .then((processedStory) => {
     console.log(processedStory);
   });
+
+// Important!!!
+// * In your code, you are required (please read this carefully):
+// * - to return a list of objects
+// * - each object should definitely have a field, `word`
+// * - each object should maybe have a field, `pos` (part of speech)
+
+//How to use regular expressions for the project
