@@ -28,8 +28,27 @@
  */
 function parseStory(rawStory) {
   // Your code here.
-  return {}; // This line is currently wrong :)
+  console.log(rawStory);
+  let splitArr = rawStory.split(" ");
+  // console.log(splitArr);
+
+  let wordsAndPos = /\w+\[(.*?)\]/g;
+  let numbers = /[0-9]/g;
+  let signs = /[.,]/g;
+  let arrayOfWords = [];
+
+  result = wordsAndPos.exec(rawStory);
+  result1 = signs.exec(rawStory);
+  result2 = numbers.exec(rawStory);
+  console.log(result1);
+  // for (let i = 0; i <= splitArr.length; i++) {
+  //   result = wordsAndPos.exec(rawStory);
+  //   result1 = signs.exec(rawStory);
+  //   result2 = numbers.exec(rawStory);
+  //   console.log(result1);
+  // }
 }
+// console.log(parseStory())
 
 /**
  * All your other JavaScript code goes here, inside the function. Don't worry about
@@ -47,3 +66,11 @@ getRawStory()
   .then((processedStory) => {
     console.log(processedStory);
   });
+
+// Important!!!
+// * In your code, you are required (please read this carefully):
+// * - to return a list of objects
+// * - each object should definitely have a field, `word`
+// * - each object should maybe have a field, `pos` (part of speech)
+
+//How to use regular expressions for the project
