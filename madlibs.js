@@ -28,8 +28,25 @@
  */
 function parseStory(rawStory) {
   // Your code here.
-  return JSON.parse(rawStory);
-  // This line is currently wrong :)
+  console.log(rawStory);
+  let splitArr = rawStory.split(" ");
+  // console.log(splitArr);
+
+  let wordsAndPos = /\w+\[(.*?)\]/g;
+  let numbers = /[0-9]/g;
+  let signs = /[.,]/g;
+  let arrayOfWords = [];
+
+  result = wordsAndPos.exec(rawStory);
+  result1 = signs.exec(rawStory);
+  result2 = numbers.exec(rawStory);
+  console.log(result1);
+  // for (let i = 0; i <= splitArr.length; i++) {
+  //   result = wordsAndPos.exec(rawStory);
+  //   result1 = signs.exec(rawStory);
+  //   result2 = numbers.exec(rawStory);
+  //   console.log(result1);
+  // }
 }
 // console.log(parseStory())
 
