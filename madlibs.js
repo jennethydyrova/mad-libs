@@ -28,26 +28,54 @@
  */
 function parseStory(rawStory) {
   // Your code here.
-  console.log(rawStory);
+  // console.log(rawStory);
   let splitArr = rawStory.split(" ");
   // console.log(splitArr);
 
-  let wordsAndPos = /\w+\[(.*?)\]/g;
-  let numbers = /[0-9]/g;
-  let signs = /[.,]/g;
-  let arrayOfWords = [];
+  const wordsAndPos = /\w+\[[n|v|a]\]/i;
+  const words = /\b(\w\w*)\b/i;
+  const signs = /[.,]/i;
+  const arrayOfWords = [];
 
-  result = wordsAndPos.exec(rawStory);
-  result1 = signs.exec(rawStory);
-  result2 = numbers.exec(rawStory);
-  console.log(result1);
-  // for (let i = 0; i <= splitArr.length; i++) {
-  //   result = wordsAndPos.exec(rawStory);
-  //   result1 = signs.exec(rawStory);
-  //   result2 = numbers.exec(rawStory);
-  //   console.log(result1);
-  // }
+  const posObj = {
+    n: "noun",
+    v: "verb",
+    a: "adjective",
+  };
+
+  // console.log(splitArr);
+
+  for (let i = 0; i < splitArr.length; i++) {
+    if (wordsAndPos.test(splitArr[i])) {
+      const result = wordsAndPos.exec(splitArr[i]);
+      let pos = result[0][result[0].length - 2];
+      console.log(pos);
+      arrayOfWords.push({
+        name: result[0],
+        pos: posObj[pos],
+      });
+    } else if (words.test(splitArr[i])) {
+      const result1 = words.exec(splitArr[i]);
+      // console.log(result1);
+      arrayOfWords.push({
+        name: result1[0],
+      });
+    } else if (signs.test(splitArr[i])) {
+      const result2 = signs.exec(splitArr[i]);
+      console.log(result2);
+      arrayOfWords.push({
+        name: result2[0],
+      });
+    }
+
+    // result = wordsAndPos.exec(splitArr);
+    //  result1 =  signs.exec(splitArr);
+    //  result2 = words.exec(splitArr);
+    // console.log(result);
+  }
+  console.log(arrayOfWords);
 }
+
 // console.log(parseStory())
 
 /**
@@ -74,3 +102,5 @@ getRawStory()
 // * - each object should maybe have a field, `pos` (part of speech)
 
 //How to use regular expressions for the project
+
+// First, preheat the oven to 180[number] degrees. Then take[verb] 4[number] chicken[noun] egg(s). With the gramm[noun] of oil[noun]. Next, add 2[number] teaspoons of baking soda and mix with egg(s) and oil[noun] until it reaches a nice[adjective] texture. Add some milky[adjective] chocolate[noun] to make your cake. Don't forget the sugar[noun]. Pour into a 2[number] x 3[number] pan and bake for 10[number] minutes or until cake is smells good[adjective].
