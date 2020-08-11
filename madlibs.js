@@ -34,9 +34,9 @@ function parseStory(rawStory) {
 
   const wordsAndPos = /\w+\[[n|v|a]\]/i;
   const words = /\b(\w\w*)\b/i;
-  const signs = /w/i;
+
   const arrayOfWords = [];
-  console.log(signs[signs.length - 1]);
+
   const posObj = {
     n: "noun",
     v: "verb",
@@ -62,7 +62,7 @@ function parseStory(rawStory) {
         splitArr[i][splitArr[i].length - 1] === "." ||
         splitArr[i][splitArr[i].length - 1] === ","
       ) {
-        console.log(splitArr[i]);
+        // console.log(splitArr[i]);
         arrayOfWords.push({
           name: splitArr[i][splitArr[i].length - 1],
         });
@@ -76,25 +76,18 @@ function parseStory(rawStory) {
         splitArr[i][splitArr[i].length - 1] === "." ||
         splitArr[i][splitArr[i].length - 1] === ","
       ) {
-        console.log(splitArr[i]);
+        // console.log(splitArr[i]);
         arrayOfWords.push({
           name: splitArr[i][splitArr[i].length - 1],
         });
       }
     }
-    // else if (signs.test(splitArr[i])) {
-    //   const result2 = signs.exec(splitArr[i]);
-
-    //   if (result2[result2.length - 1] === "." || ",") {
-    //   }
-    //   console.log(result2);
-    //   arrayOfWords.push({
-    //     name: result2[0],
-    //   });
-    // }
   }
-  console.log(arrayOfWords);
+
+  // console.log(arrayOfWords);
+  return arrayOfWords;
 }
+// console.log(parseStory());
 
 // console.log(parseStory())
 
@@ -111,10 +104,29 @@ function parseStory(rawStory) {
  */
 getRawStory()
   .then(parseStory)
-
   .then((processedStory) => {
     console.log(processedStory);
+    for (let word of processedStory) {
+      console.log(word.pos);
+      if (word.pos) {
+        displayInput(word);
+      } else {
+        displayWord(word.name);
+      }
+    }
+    // console.log(processedStory);
   });
+function displayInput(input) {
+  let x = document.createElement("input");
+  x.setAttribute("type", "text");
+  x.placeholder = input.pos;
+  document.querySelector(".madLibsEdit").appendChild(x);
+}
+function displayWord(word) {
+  let y = document.createElement("p");
+  y.innerText = word;
+  document.querySelector(".madLibsEdit").appendChild(y);
+}
 
 // Important!!!
 // * In your code, you are required (please read this carefully):
