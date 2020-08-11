@@ -34,9 +34,9 @@ function parseStory(rawStory) {
 
   const wordsAndPos = /\w+\[[n|v|a]\]/i;
   const words = /\b(\w\w*)\b/i;
-  const signs = /[.,]/i;
+  const signs = /w/i;
   const arrayOfWords = [];
-
+  console.log(signs[signs.length - 1]);
   const posObj = {
     n: "noun",
     v: "verb",
@@ -47,31 +47,51 @@ function parseStory(rawStory) {
 
   for (let i = 0; i < splitArr.length; i++) {
     if (wordsAndPos.test(splitArr[i])) {
+      // console.log(splitArr[i]);
       const result = wordsAndPos.exec(splitArr[i]);
+      // const checkDotAndComma = () => {} !!! do not delete. make a function later
+
+      // checkDotAndComma();
       let pos = result[0][result[0].length - 2];
-      console.log(pos);
       arrayOfWords.push({
-        name: result[0],
+        name: result[0].slice(0, -3),
         pos: posObj[pos],
       });
+
+      if (
+        splitArr[i][splitArr[i].length - 1] === "." ||
+        splitArr[i][splitArr[i].length - 1] === ","
+      ) {
+        console.log(splitArr[i]);
+        arrayOfWords.push({
+          name: splitArr[i][splitArr[i].length - 1],
+        });
+      }
     } else if (words.test(splitArr[i])) {
       const result1 = words.exec(splitArr[i]);
-      // console.log(result1);
       arrayOfWords.push({
         name: result1[0],
       });
-    } else if (signs.test(splitArr[i])) {
-      const result2 = signs.exec(splitArr[i]);
-      console.log(result2);
-      arrayOfWords.push({
-        name: result2[0],
-      });
+      if (
+        splitArr[i][splitArr[i].length - 1] === "." ||
+        splitArr[i][splitArr[i].length - 1] === ","
+      ) {
+        console.log(splitArr[i]);
+        arrayOfWords.push({
+          name: splitArr[i][splitArr[i].length - 1],
+        });
+      }
     }
+    // else if (signs.test(splitArr[i])) {
+    //   const result2 = signs.exec(splitArr[i]);
 
-    // result = wordsAndPos.exec(splitArr);
-    //  result1 =  signs.exec(splitArr);
-    //  result2 = words.exec(splitArr);
-    // console.log(result);
+    //   if (result2[result2.length - 1] === "." || ",") {
+    //   }
+    //   console.log(result2);
+    //   arrayOfWords.push({
+    //     name: result2[0],
+    //   });
+    // }
   }
   console.log(arrayOfWords);
 }
@@ -91,6 +111,7 @@ function parseStory(rawStory) {
  */
 getRawStory()
   .then(parseStory)
+
   .then((processedStory) => {
     console.log(processedStory);
   });

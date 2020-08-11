@@ -1,1 +1,1 @@
-louis[n] went[v] to the store[n], and it was fun[a].
+louis[n] went[v] to. the store[n], and it was fun[a].
