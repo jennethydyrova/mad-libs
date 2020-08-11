@@ -84,12 +84,9 @@ function parseStory(rawStory) {
     }
   }
 
-  // console.log(arrayOfWords);
   return arrayOfWords;
+  // console.log(arrayOfWords);
 }
-// console.log(parseStory());
-
-// console.log(parseStory())
 
 /**
  * All your other JavaScript code goes here, inside the function. Don't worry about
@@ -107,11 +104,12 @@ getRawStory()
   .then((processedStory) => {
     console.log(processedStory);
     for (let word of processedStory) {
-      console.log(word.pos);
       if (word.pos) {
         displayInput(word);
+        displayPreview(word.pos);
       } else {
         displayWord(word.name);
+        displayPreview(word.name);
       }
     }
     // console.log(processedStory);
@@ -121,13 +119,21 @@ function displayInput(input) {
   x.setAttribute("type", "text");
   x.placeholder = input.pos;
   document.querySelector(".madLibsEdit").appendChild(x);
+
+  x.onkeyup = function (str) {
+    document.querySelector(".madLibsPreview").value = this.value;
+  };
 }
 function displayWord(word) {
   let y = document.createElement("p");
   y.innerText = word;
   document.querySelector(".madLibsEdit").appendChild(y);
 }
-
+function displayPreview(word) {
+  let y = document.createElement("p");
+  y.innerText = word;
+  document.querySelector(".madLibsPreview").appendChild(y);
+}
 // Important!!!
 // * In your code, you are required (please read this carefully):
 // * - to return a list of objects

@@ -1,3 +1,7 @@
 /**
  * Your CSS goes here.
  */
+.texts {
+  display: flex;
+  justify-content: space-around;
+}
