@@ -107,10 +107,17 @@ getRawStory()
       if (word.pos) {
         const input = displayInput(word);
         const preview = displayPreview(word.pos);
-        input.onkeyup = function (str) {
+        input.addEventListener("input", (e) => {
           let inputValue = input.value;
           preview.innerHTML = inputValue;
-        };
+        });
+        input.addEventListener("keypress", (e) => {
+          e.preventDefault();
+          // console.log(e);
+          if (e.key === "Enter") {
+            console.log("hello");
+          }
+        });
       } else {
         displayWord(word.name);
         displayPreview(word.name);
@@ -118,22 +125,23 @@ getRawStory()
     }
 
     function displayInput(input) {
-      let x = document.createElement("input");
-      x.setAttribute("type", "text");
-      x.placeholder = input.pos;
-      document.querySelector(".madLibsEdit").appendChild(x);
-      return x;
+      let inputBox = document.createElement("input");
+      inputBox.setAttribute("type", "text");
+      inputBox.placeholder = input.pos;
+      inputBox.setAttribute("maxlength", "20");
+      document.querySelector(".madLibsEdit").appendChild(inputBox);
+      return inputBox;
     }
     function displayWord(word) {
-      let y = document.createElement("p");
-      y.innerText = word;
-      document.querySelector(".madLibsEdit").appendChild(y);
+      let previewWord = document.createElement("p");
+      previewWord.innerText = word;
+      document.querySelector(".madLibsEdit").appendChild(previewWord);
     }
     function displayPreview(word) {
-      let y = document.createElement("p");
-      y.innerText = word;
-      document.querySelector(".madLibsPreview").appendChild(y);
-      return y;
+      let previewWord = document.createElement("p");
+      previewWord.innerText = word;
+      document.querySelector(".madLibsPreview").appendChild(previewWord);
+      return previewWord;
     }
   });
 
