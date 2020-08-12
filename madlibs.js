@@ -105,35 +105,38 @@ getRawStory()
     console.log(processedStory);
     for (let word of processedStory) {
       if (word.pos) {
-        displayInput(word);
-        displayPreview(word.pos);
+        const input = displayInput(word);
+        const preview = displayPreview(word.pos);
+        input.onkeyup = function (str) {
+          let inputValue = input.value;
+          preview.innerHTML = inputValue;
+        };
       } else {
         displayWord(word.name);
         displayPreview(word.name);
       }
     }
-    // console.log(processedStory);
-  });
-function displayInput(input) {
-  let x = document.createElement("input");
-  x.setAttribute("type", "text");
-  x.placeholder = input.pos;
-  document.querySelector(".madLibsEdit").appendChild(x);
 
-  x.onkeyup = function (str) {
-    document.querySelector(".madLibsPreview").value = this.value;
-  };
-}
-function displayWord(word) {
-  let y = document.createElement("p");
-  y.innerText = word;
-  document.querySelector(".madLibsEdit").appendChild(y);
-}
-function displayPreview(word) {
-  let y = document.createElement("p");
-  y.innerText = word;
-  document.querySelector(".madLibsPreview").appendChild(y);
-}
+    function displayInput(input) {
+      let x = document.createElement("input");
+      x.setAttribute("type", "text");
+      x.placeholder = input.pos;
+      document.querySelector(".madLibsEdit").appendChild(x);
+      return x;
+    }
+    function displayWord(word) {
+      let y = document.createElement("p");
+      y.innerText = word;
+      document.querySelector(".madLibsEdit").appendChild(y);
+    }
+    function displayPreview(word) {
+      let y = document.createElement("p");
+      y.innerText = word;
+      document.querySelector(".madLibsPreview").appendChild(y);
+      return y;
+    }
+  });
+
 // Important!!!
 // * In your code, you are required (please read this carefully):
 // * - to return a list of objects
