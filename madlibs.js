@@ -111,13 +111,12 @@ getRawStory()
           let inputValue = input.value;
           preview.innerHTML = inputValue;
         });
-        input.addEventListener("keypress", (e) => {
-          e.preventDefault();
-          // console.log(e);
-          if (e.key === "Enter") {
-            console.log("hello");
-          }
-        });
+        // input.addEventListener("keypress", (e) => {
+        //   e.preventDefault();
+        //   if (e.key === "Enter") {
+        //     console.log("hello");
+        //   }
+        // });
       } else {
         displayWord(word.name);
         displayPreview(word.name);
