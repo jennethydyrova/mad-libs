@@ -110,19 +110,54 @@ getRawStory()
         input.addEventListener("input", (e) => {
           let inputValue = input.value;
           preview.innerHTML = inputValue;
+          if ((input.innerHTML = input.value)) {
+            input.style.backgroundColor = "red";
+          } else {
+            input.style.backgroundColor = "white";
+          }
         });
-        // input.addEventListener("keypress", (e) => {
-        //   e.preventDefault();
-        //   if (e.key === "Enter") {
-        //     console.log("hello");
-        //   }
-        // });
       } else {
         displayWord(word.name);
         displayPreview(word.name);
       }
     }
+    //figure out this
+    // const fillTheInput = () => {
+    //   const input = document.querySelector("input");
+    //   if ((value = "")) {
+    //     input.innerHTML = inputBox.placeholder;
+    //     input.style.backgroundColor = "white";
+    //   } else {
+    //     input.innerHTML = value;
+    //     input.style.color = "red";
+    //   }
+    // };
+    // fillTheInput();
 
+    //figure out this
+    function tab(e) {
+      var inputs = document.querySelectorAll("input");
+
+      for (let i = 0; i < inputs.length; i++) {
+        const nextELement = inputs[i + 1];
+        const firstELement = inputs[0];
+        const lastIndex = inputs.length;
+
+        inputs[i].addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            nextELement.focus();
+            // console.log(inputs[i - 1]);
+            // if (e.key === "Enter" && inputs[i][lastIndex - 1]) {
+            //   firstELement.focus();
+            // }
+          }
+        });
+      }
+
+      console.log(inputs);
+    }
+    tab();
     function displayInput(input) {
       let inputBox = document.createElement("input");
       inputBox.setAttribute("type", "text");

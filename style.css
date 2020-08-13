@@ -6,6 +6,9 @@
   display: inline-block;
   padding: 2px;
 }
+.madLibsEdit input {
+  margin-left: 10px;
+}
 body {
   background: rgb(142, 219, 97);
   background: linear-gradient(
@@ -15,11 +18,18 @@ body {
   );
 }
 .texts {
-  margin-top: 150px;
+  margin-top: 80px;
 }
-input:hover {
-  background: lightcoral;
+input:focus {
+  background: lightsalmon;
 }
-input {
+.header {
   width: 80px;
+}
+body h1 {
+  font-family: "Shadows Into Light", cursive;
+  font-size: 120px;
+  color: red;
+  text-align: center;
+  padding-top: 15px;
 }
