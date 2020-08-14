@@ -140,22 +140,24 @@ getRawStory()
 
       for (let i = 0; i < inputs.length; i++) {
         const nextELement = inputs[i + 1];
-        const firstELement = inputs[0];
-        const lastIndex = inputs.length;
+        // const firstElement = inputs[0];
+        const lastELement = inputs[inputs.length - 1];
+        // console.log(firstELement);
+        // console.log(inputs);
+        // const lastIndex = inputs.length;
 
         inputs[i].addEventListener("keypress", (e) => {
-          if (e.key === "Enter") {
+          console.log(e.key);
+          if (e.key === "Enter" && nextELement)› {
             e.preventDefault();
             nextELement.focus();
-            // console.log(inputs[i - 1]);
-            // if (e.key === "Enter" && inputs[i][lastIndex - 1]) {
-            //   firstELement.focus();
-            // }
+          } else if (e.key === "Enter" && lastELement) {
+            inputs[0].focus();
           }
         });
       }
 
-      console.log(inputs);
+      // console.log(inputs);
     }
     tab();
     function displayInput(input) {
