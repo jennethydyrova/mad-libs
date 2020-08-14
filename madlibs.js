@@ -148,7 +148,7 @@ getRawStory()
 
         inputs[i].addEventListener("keypress", (e) => {
           console.log(e.key);
-          if (e.key === "Enter" && nextELement)› {
+          if (e.key === "Enter" && nextELement) {
             e.preventDefault();
             nextELement.focus();
           } else if (e.key === "Enter" && lastELement) {
