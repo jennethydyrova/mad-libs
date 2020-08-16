@@ -106,14 +106,20 @@ getRawStory()
     for (let word of processedStory) {
       if (word.pos) {
         const input = displayInput(word);
-        const preview = displayPreview(word.pos);
+        const preview = displayPreview(`(${word.pos})`);
         input.addEventListener("input", (e) => {
           let inputValue = input.value;
-          preview.innerHTML = inputValue;
-          if ((input.innerHTML = input.value)) {
-            input.style.backgroundColor = "red";
+          if (inputValue === "") {
+            preview.innerHTML = `(${word.pos})`;
           } else {
-            input.style.backgroundColor = "white";
+            preview.innerHTML = inputValue;
+          }
+
+          if (inputValue) {
+            input.style.backgroundColor = "#255A02";
+            input.style.color = "white";
+          } else {
+            input.style.backgroundColor = null;
           }
         });
       } else {
@@ -134,10 +140,8 @@ getRawStory()
     // };
     // fillTheInput();
 
-    //figure out this
     function tab(e) {
       var inputs = document.querySelectorAll("input");
-
       for (let i = 0; i < inputs.length; i++) {
         const nextELement = inputs[i + 1];
         // const firstElement = inputs[0];
@@ -145,7 +149,6 @@ getRawStory()
         // console.log(firstELement);
         // console.log(inputs);
         // const lastIndex = inputs.length;
-
         inputs[i].addEventListener("keypress", (e) => {
           console.log(e.key);
           if (e.key === "Enter" && nextELement) {
@@ -156,7 +159,6 @@ getRawStory()
           }
         });
       }
-
       // console.log(inputs);
     }
     tab();

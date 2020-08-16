@@ -20,16 +20,30 @@ body {
 .texts {
   margin-top: 80px;
 }
+
 input:focus {
   background: lightsalmon;
 }
 .header {
   width: 80px;
+  text-align: center;
 }
 body h1 {
   font-family: "Shadows Into Light", cursive;
   font-size: 120px;
   color: red;
-  text-align: center;
+
   padding-top: 15px;
+}
+h1 {
+  text-align: center;
+}
+
+footer {
+  background-color: white;
+}
+footer h6 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
