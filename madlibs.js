@@ -46,25 +46,19 @@ function parseStory(rawStory) {
   // console.log(splitArr);
 
   for (let i = 0; i < splitArr.length; i++) {
-    if (wordsAndPos.test(splitArr[i])) {
-      // console.log(splitArr[i]);
-      const result = wordsAndPos.exec(splitArr[i]);
-      // const checkDotAndComma = () => {} !!! do not delete. make a function later
+    let dotOrComma = splitArr[i][splitArr[i].length - 1];
 
-      // checkDotAndComma();
+    if (wordsAndPos.test(splitArr[i])) {
+      const result = wordsAndPos.exec(splitArr[i]);
       let pos = result[0][result[0].length - 2];
       arrayOfWords.push({
         name: result[0].slice(0, -3),
         pos: posObj[pos],
       });
 
-      if (
-        splitArr[i][splitArr[i].length - 1] === "." ||
-        splitArr[i][splitArr[i].length - 1] === ","
-      ) {
-        // console.log(splitArr[i]);
+      if (dotOrComma === "." || dotOrComma === ",") {
         arrayOfWords.push({
-          name: splitArr[i][splitArr[i].length - 1],
+          name: dotOrComma,
         });
       }
     } else if (words.test(splitArr[i])) {
@@ -72,20 +66,15 @@ function parseStory(rawStory) {
       arrayOfWords.push({
         name: result1[0],
       });
-      if (
-        splitArr[i][splitArr[i].length - 1] === "." ||
-        splitArr[i][splitArr[i].length - 1] === ","
-      ) {
-        // console.log(splitArr[i]);
+      if (dotOrComma === "." || dotOrComma === ",") {
         arrayOfWords.push({
-          name: splitArr[i][splitArr[i].length - 1],
+          name: dotOrComma,
         });
       }
     }
   }
 
   return arrayOfWords;
-  // console.log(arrayOfWords);
 }
 
 /**
@@ -109,12 +98,12 @@ getRawStory()
         const preview = displayPreview(`(${word.pos})`);
         input.addEventListener("input", (e) => {
           let inputValue = input.value;
+
           if (inputValue === "") {
             preview.innerHTML = `(${word.pos})`;
           } else {
             preview.innerHTML = inputValue;
           }
-
           if (inputValue) {
             input.style.backgroundColor = "#255A02";
             input.style.color = "white";
@@ -127,28 +116,12 @@ getRawStory()
         displayPreview(word.name);
       }
     }
-    //figure out this
-    // const fillTheInput = () => {
-    //   const input = document.querySelector("input");
-    //   if ((value = "")) {
-    //     input.innerHTML = inputBox.placeholder;
-    //     input.style.backgroundColor = "white";
-    //   } else {
-    //     input.innerHTML = value;
-    //     input.style.color = "red";
-    //   }
-    // };
-    // fillTheInput();
 
     function tab(e) {
       var inputs = document.querySelectorAll("input");
       for (let i = 0; i < inputs.length; i++) {
         const nextELement = inputs[i + 1];
-        // const firstElement = inputs[0];
         const lastELement = inputs[inputs.length - 1];
-        // console.log(firstELement);
-        // console.log(inputs);
-        // const lastIndex = inputs.length;
         inputs[i].addEventListener("keypress", (e) => {
           console.log(e.key);
           if (e.key === "Enter" && nextELement) {
@@ -159,7 +132,6 @@ getRawStory()
           }
         });
       }
-      // console.log(inputs);
     }
     tab();
     function displayInput(input) {
@@ -182,6 +154,19 @@ getRawStory()
       return previewWord;
     }
   });
+
+//figure out this
+// const fillTheInput = () => {
+//   const input = document.querySelector("input");
+//   if ((value = "")) {
+//     input.innerHTML = inputBox.placeholder;
+//     input.style.backgroundColor = "white";
+//   } else {
+//     input.innerHTML = value;
+//     input.style.color = "red";
+//   }
+// };
+// fillTheInput();
 
 // Important!!!
 // * In your code, you are required (please read this carefully):

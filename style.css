@@ -18,9 +18,14 @@ body {
   );
 }
 .texts {
-  margin-top: 80px;
+  margin-top: 10px;
 }
-
+img {
+  width: 200px;
+  height: 450px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+}
 input:focus {
   background: lightsalmon;
 }
@@ -32,18 +37,28 @@ body h1 {
   font-family: "Shadows Into Light", cursive;
   font-size: 120px;
   color: red;
-
   padding-top: 15px;
 }
 h1 {
   text-align: center;
 }
-
-footer {
-  background-color: white;
+.previewPos {
+  font-family: "Shadows Into Light", cursive;
+  font-size: 25px;
+  color: red;
 }
-footer h6 {
+.footer {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
   align-items: center;
+  align-content: space-around;
+  margin-bottom: 20px;
+  padding-left: 10px;
+}
+
+.bells {
+  width: 200px;
+  height: 80px;
 }
