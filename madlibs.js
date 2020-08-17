@@ -101,8 +101,10 @@ getRawStory()
 
           if (inputValue === "") {
             preview.innerHTML = `(${word.pos})`;
+            preview.style.fontWeight =  null;
           } else {
             preview.innerHTML = inputValue;
+            preview.style.fontWeight = "bold";
           }
           if (inputValue) {
             input.style.backgroundColor = "#255A02";
