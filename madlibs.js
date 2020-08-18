@@ -43,7 +43,6 @@ function parseStory(rawStory) {
   };
 
   for (let i = 0; i < splitArr.length; i++) {
-    //variable that stores dot or comma
     let dotOrComma = splitArr[i][splitArr[i].length - 1];
     //testing if pos exists in elements of array
     if (wordsAndPos.test(splitArr[i])) {
@@ -92,7 +91,6 @@ getRawStory()
     console.log(processedStory);
     //iterate over an array of objects to reach every element
     for (let word of processedStory) {
-      //if word has pos
       if (word.pos) {
         const input = displayInput(word);
         const preview = displayPreview(`(${word.pos})`);
