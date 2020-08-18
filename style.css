@@ -47,6 +47,7 @@ h1 {
   font-size: 25px;
   color: red;
 }
+
 .footer {
   display: flex;
   flex-direction: row;
@@ -61,4 +62,8 @@ h1 {
 .bells {
   width: 200px;
   height: 80px;
+}
+input {
+  border: 1px solid #f24e38;
+  border-radius: 4px;
 }

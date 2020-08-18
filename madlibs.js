@@ -28,52 +28,50 @@
  */
 function parseStory(rawStory) {
   // Your code here.
-  // console.log(rawStory);
   let splitArr = rawStory.split(" ");
-  // console.log(splitArr);
-
+  console.log(splitArr);
+  //RegEx for pos and words
   const wordsAndPos = /\w+\[[n|v|a]\]/i;
   const words = /\b(\w\w*)\b/i;
 
   const arrayOfWords = [];
-
+  //object for pos
   const posObj = {
     n: "noun",
     v: "verb",
     a: "adjective",
   };
 
-  // console.log(splitArr);
-
   for (let i = 0; i < splitArr.length; i++) {
+    //variable that stores dot or comma
     let dotOrComma = splitArr[i][splitArr[i].length - 1];
-
+    //testing if pos exists in elements of array
     if (wordsAndPos.test(splitArr[i])) {
+      //searches for a specific string
       const result = wordsAndPos.exec(splitArr[i]);
+      //cuts off the pos part
       let pos = result[0][result[0].length - 2];
+      //push pos to an empty array
       arrayOfWords.push({
         name: result[0].slice(0, -3),
+        //if n, then noun. if v, then verb. if a, then adjective
         pos: posObj[pos],
       });
-
+      //checks if there is dot or coma at the end of each element of an array
       if (dotOrComma === "." || dotOrComma === ",") {
         arrayOfWords.push({
           name: dotOrComma,
         });
       }
+      //checks if there is word among the elements of an array
     } else if (words.test(splitArr[i])) {
       const result1 = words.exec(splitArr[i]);
       arrayOfWords.push({
         name: result1[0],
       });
-      if (dotOrComma === "." || dotOrComma === ",") {
-        arrayOfWords.push({
-          name: dotOrComma,
-        });
-      }
     }
   }
-
+  //returns an array of words, dot or comma, and pos
   return arrayOfWords;
 }
 
@@ -92,40 +90,44 @@ getRawStory()
   .then(parseStory)
   .then((processedStory) => {
     console.log(processedStory);
+    //iterate over an array of objects to reach every element
     for (let word of processedStory) {
+      //if word has pos
       if (word.pos) {
         const input = displayInput(word);
         const preview = displayPreview(`(${word.pos})`);
         input.addEventListener("input", (e) => {
           let inputValue = input.value;
-
+          //if condition for real-time update
+          //if input does not have value, display in preview pos.
           if (inputValue === "") {
             preview.innerHTML = `(${word.pos})`;
-            preview.style.fontWeight =  null;
+            preview.style.fontWeight = null;
           } else {
+            //if input has value, display input in preview
             preview.innerHTML = inputValue;
             preview.style.fontWeight = "bold";
           }
           if (inputValue) {
-            input.style.backgroundColor = "#255A02";
+            input.style.backgroundColor = "#DB202E";
             input.style.color = "white";
           } else {
             input.style.backgroundColor = null;
           }
         });
       } else {
+        //display value of name key in word object
         displayWord(word.name);
         displayPreview(word.name);
       }
     }
-
+    //function for enter hotkey
     function tab(e) {
       var inputs = document.querySelectorAll("input");
       for (let i = 0; i < inputs.length; i++) {
         const nextELement = inputs[i + 1];
         const lastELement = inputs[inputs.length - 1];
         inputs[i].addEventListener("keypress", (e) => {
-          console.log(e.key);
           if (e.key === "Enter" && nextELement) {
             e.preventDefault();
             nextELement.focus();
@@ -136,6 +138,7 @@ getRawStory()
       }
     }
     tab();
+    //fucntion for displaying input
     function displayInput(input) {
       let inputBox = document.createElement("input");
       inputBox.setAttribute("type", "text");
@@ -144,11 +147,13 @@ getRawStory()
       document.querySelector(".madLibsEdit").appendChild(inputBox);
       return inputBox;
     }
+    //function for displaying words in madLibsEdit
     function displayWord(word) {
       let previewWord = document.createElement("p");
       previewWord.innerText = word;
       document.querySelector(".madLibsEdit").appendChild(previewWord);
     }
+    //function for displaying words in madLibsPreview
     function displayPreview(word) {
       let previewWord = document.createElement("p");
       previewWord.innerText = word;
